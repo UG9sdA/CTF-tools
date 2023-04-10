@@ -1746,7 +1746,7 @@ if ($act == "upload")
      $b = "";
      while(file_exists($uploadpath.$destin)) {if ($i > 0) {$b = "_".$i;} $destin = "index".$b.".html"; $i++;}}
    }
-   if ((!eregi("http://",$uploadurl)) and (!eregi("https://",$uploadurl)) and (!eregi("ftp://",$uploadurl))) {echo "<b>Yanlis URL!
+   if ((!preg_match("/http:\/\//i",$uploadurl)) and (!preg_match("/https:\/\//i",$uploadurl)) and (!preg_match("/ftp:\/\//i",$uploadurl))) {echo "<b>Yanlis URL!
 </b><br>";}
    else
    {
@@ -2438,7 +2438,7 @@ if ($act == "f")
   $ext = strtolower($ext);
   $rft = "";
   foreach($ftypes as $k=>$v) {if (in_array($ext,$v)) {$rft = $k; break;}}
-  if (eregi("sess_(.*)",$f)) {$rft = "phpsess";}
+  if (preg_match("/sess_(.*)/i",$f)) {$rft = "phpsess";}
   if (empty($ft)) {$ft = $rft;}
   $arr = array(
    array("<img src=\"".$surl."act=img&img=ext_diz\" border=\"0\">","info"),
